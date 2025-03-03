@@ -1,0 +1,20 @@
+<h2>🎁 Tirages pour le groupe <%= @group.name %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Offrant</th>
+      <th>Reçoit un cadeau de</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @draws.each do |draw| %>
+      <tr>
+        <td><%= draw.user.name %></td>
+        <td><%= draw.recipient.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= button_to "🔄 Refaire le tirage", perform_draw_admin_group_path(@group), method: :post, data: { confirm: "Êtes-vous sûr de vouloir refaire le tirage ?" } %>

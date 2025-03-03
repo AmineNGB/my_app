@@ -1,0 +1,89 @@
+.navbar-lewagon {
+  justify-content: space-between;
+  background: white;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 40px;
+}
+
+.footer {
+  background: #F4F4F4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0px 50px;
+  color: rgba(0,0,0,0.3);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+.footer-links a {
+  color: black;
+  opacity: 0.15;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 0px 10px;
+}
+.footer-links a:hover {
+  opacity: 1;
+}
+.footer .fa-heart {
+  color: #D23333;
+}
+
+// Import Bootstrap icons
+@import "bootstrap-icons/font/bootstrap-icons";
+
+
+// Section quand le tirage n’a pas encore eu lieu
+.empty-draw {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  background: #f8f9fa;
+  color: #555;
+
+  i {
+    font-size: 50px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+// Section après tirage
+.draw-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user {
+  text-align: center;
+}
+
+
+.bi-arrow-right-circle {
+  font-size: 40px;
+  color: #007bff;
+}

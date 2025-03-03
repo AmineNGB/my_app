@@ -1,0 +1,9 @@
+@use 'bootstrap/scss/bootstrap';
+@use 'bootstrap-icons/font/bootstrap-icons';
+// Graphical variables
+@use "config/colors";
+@use "config/fonts";
+@use "config/bootstrap_variables";
+
+// Your CSS partials
+@use "components/index";

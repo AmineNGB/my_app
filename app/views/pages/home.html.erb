@@ -1,0 +1,35 @@
+
+
+<div class="container text-center mt-5">
+  <h1>Salam</h1>
+    <p><%= link_to "titi", edit_user_registration_path(current_user) %></p>
+
+  <p><%= @group.name %></p>
+  <% if @draw.nil? %>
+    <!-- Message si le tirage n'a pas encore eu lieu -->
+    <div class="empty-draw">
+      <i class="bi bi-question-circle"></i>
+      <h2>Le tirage n'a pas encore eu lieu</h2>
+      <p>Revenez plus tard pour voir votre destinataire !</p>
+    </div>
+  <% else %>
+    <!-- Affichage du tirage -->
+    <div class="draw-card">
+      <div class="user">
+        <% if current_user.avatar.attached? %>
+          <%= cl_image_tag current_user.avatar.key, style: "max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;"  %>
+          <p><strong><%= current_user.name %></strong></p>
+        <% end %>
+
+      </div>
+      <i class="bi bi-arrow-right-circle"></i>
+      <div class="user">
+        <% if @draw.recipient.avatar.attached? %>
+          <%= image_tag @draw.recipient.avatar.key, style: "max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;" %>
+          <p><strong><%= @draw.recipient.name %></strong></p>
+        <% end%>
+
+      </div>
+    </div>
+  <% end %>
+</div>
