@@ -18,4 +18,5 @@ Rails.application.routes.draw do
       post :perform_draw, on: :member
     end
   end
+  resource :accepted_users, only: [:edit, :update]
 end

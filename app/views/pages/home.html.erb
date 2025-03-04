@@ -1,35 +1,74 @@
+<% if false%>
+<div class="notification">
+  <div class="notification-content">
+    <p><small>Première étape</small></p>
+    <p>Modifier les préférences de ton compte avant le tirage au sort.</p>
+    <ul>
+      <li><small>Tu peux choisir de tirer aux sorts uniquement le même genre que toi.</small></li>
+      <li><small>Tu peux choisir de ne pas tirer aux sorts les gens par alliance (ex: la belle-soeur).</small></li>
+    </ul>
+  </div>
+  <%= link_to "Modifier les préférences de ton compte", edit_user_registration_path(current_user), class: "btn btn-secondary" %>
+</div>
+<% end %>
 
 
-<div class="container text-center mt-5">
-  <h1>Salam</h1>
-    <p><%= link_to "titi", edit_user_registration_path(current_user) %></p>
-
-  <p><%= @group.name %></p>
+<div class=" text-center mt-5">
   <% if @draw.nil? %>
     <!-- Message si le tirage n'a pas encore eu lieu -->
     <div class="empty-draw">
       <i class="bi bi-question-circle"></i>
       <h2>Le tirage n'a pas encore eu lieu</h2>
-      <p>Revenez plus tard pour voir votre destinataire !</p>
+      <p>Revenez plus tard pour voir votre receveur !</p>  
+      <p>Profites-en pour faire tes réglages : </p><br>
+      <%= link_to "Modifier les préférences de ton compte", edit_user_registration_path(current_user), class: "btn btn-secondary" %>
+
     </div>
   <% else %>
     <!-- Affichage du tirage -->
+    <h2>Salam <%= current_user.name%></h2>
+    <h2>Tu offres un cadeau à <%= @draw.recipient.name %> </h2>
     <div class="draw-card">
       <div class="user">
-        <% if current_user.avatar.attached? %>
-          <%= cl_image_tag current_user.avatar.key, style: "max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;"  %>
-          <p><strong><%= current_user.name %></strong></p>
-        <% end %>
-
-      </div>
-      <i class="bi bi-arrow-right-circle"></i>
-      <div class="user">
         <% if @draw.recipient.avatar.attached? %>
-          <%= image_tag @draw.recipient.avatar.key, style: "max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;" %>
-          <p><strong><%= @draw.recipient.name %></strong></p>
+          <%= cl_image_tag @draw.recipient.avatar.key, style: "width: 350px; height: auto; object-fit: cover; border-radius: 10px;" %>
         <% end%>
+        <p><strong><%= @draw.recipient.name %></strong></p>
 
       </div>
     </div>
   <% end %>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    <% if @draw.present? %>
+      function launchConfetti() {
+        var duration = 3 * 5000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 90, zIndex: 1000 };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        var interval = setInterval(function() {
+          var timeLeft = animationEnd - Date.now();
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+          var particleCount = 50 * (timeLeft / duration);
+          confetti({
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.9), y: randomInRange(0.1, 0.5) },
+            ...defaults
+          });
+        }, 250);
+      }
+
+      launchConfetti();
+    <% end %>
+  });
+</script>

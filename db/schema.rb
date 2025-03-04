@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_03_123804) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_03_162307) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accepted_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "accepted_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["accepted_user_id"], name: "index_accepted_users_on_accepted_user_id"
+    t.index ["user_id"], name: "index_accepted_users_on_user_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,12 +68,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_123804) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pages", force: :cascade do |t|
-    t.string "home"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "gender"
@@ -80,6 +83,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_123804) do
     t.index ["group_id"], name: "index_users_on_group_id"
   end
 
+  add_foreign_key "accepted_users", "users"
+  add_foreign_key "accepted_users", "users", column: "accepted_user_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "draws", "groups"

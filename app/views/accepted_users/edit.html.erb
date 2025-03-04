@@ -1,0 +1,14 @@
+<h2>Choisissez les personnes à qui vous acceptez d'offrir un cadeau</h2>
+
+<%= form_with url: accepted_users_path, method: :patch do %>
+  <div class="list-group">
+    <% @users.each do |user| %>
+      <label class="list-group-item">
+        <%= check_box_tag "accepted_user_ids[]", user.id, @accepted_user_ids.include?(user.id) %>
+        <%= user.name %>
+      </label>
+    <% end %>
+  </div>
+
+  <%= submit_tag "Enregistrer", class: "btn btn-primary mt-3" %>
+<% end %>

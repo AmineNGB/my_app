@@ -512,6 +512,7 @@ __metadata:
     autoprefixer: ^10.4.20
     bootstrap: ^5.3.3
     bootstrap-icons: ^1.11.3
+    canvas-confetti: ^1.9.3
     esbuild: ^0.25.0
     nodemon: ^3.1.9
     postcss: ^8.5.3
@@ -634,6 +635,13 @@ __metadata:
   version: 1.0.30001701
   resolution: "caniuse-lite@npm:1.0.30001701"
   checksum: 1abcb27ea3296dacdaa669cfe8e094432165f0541bf49ef7a88c2758d0cec5f9a839ea948f7f48c0c63c633d98f6f6c55ccf97ffebea2caaf465389500df5422
+  languageName: node
+  linkType: hard
+
+"canvas-confetti@npm:^1.9.3":
+  version: 1.9.3
+  resolution: "canvas-confetti@npm:1.9.3"
+  checksum: db044a9c9ca0e58eafd115f7dfc2f9ecc377be34d8a5dd75901dae0dafd4fb0b75fbbf8edd48bbefad2468653c5838348f0e768b79727a924259a9ada343ea30
   languageName: node
   linkType: hard
 
