@@ -21,6 +21,6 @@ class Admin::GroupsController < ApplicationController
   private
 
   def ensure_admin!
-    redirect_to root_path, alert: "Accès refusé" unless current_user.name == "Amine Neghbel"
+    redirect_to root_path, alert: "Accès refusé" unless current_user.name == "Amine"
   end
 end

@@ -13,7 +13,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <div class="d-flex align-items-center">
-            <%= current_user.group.name %>
+            <%= current_user.name %>
             <li class="nav-item dropdown">
             <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= image_tag "logo", class: "avatar", alt: "dropdown menu" %>
