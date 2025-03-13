@@ -1,3 +1,4 @@
+
 <% if false%>
 <div class="notification">
   <div class="notification-content">
@@ -21,7 +22,7 @@
       <h2>Le tirage n'a pas encore eu lieu</h2>
       <p>Revenez plus tard pour voir votre receveur !</p>  
       <p>Profites-en pour faire tes réglages : </p><br>
-      <%= link_to "Modifier les préférences de ton compte", edit_user_registration_path(current_user), class: "btn btn-secondary" %>
+      <%= link_to "Ne pas choisir certaines personnes", edit_exclusions_path, class: "btn btn-secondary" %>
 
     </div>
   <% else %>

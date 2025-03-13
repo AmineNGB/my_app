@@ -3,8 +3,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
-  has_many :accepted_users, dependent: :destroy
-  has_many :accepted_people, through: :accepted_users, source: :accepted_user
+  has_many :exclusions, dependent: :destroy
+  has_many :excluded_users, through: :exclusions, source: :excluded_user
+
+   # Pour récupérer les utilisateurs qui ont exclu ce user
+  has_many :reverse_exclusions, class_name: "Exclusion", foreign_key: "excluded_user_id", dependent: :destroy
+  has_many :excluded_by, through: :reverse_exclusions, source: :user
 
   belongs_to :group
   has_one :draw, dependent: :destroy
@@ -13,11 +17,4 @@ class User < ApplicationRecord
   validates :gender, presence: true
   validates :relation_type, presence: true
 
-  # Permet d'ajouter des personnes acceptées via un tableau d'IDs
-  def accepted_user_ids=(ids)
-    self.accepted_users.destroy_all
-    ids.reject(&:blank?).each do |accepted_id|
-      self.accepted_users.create(accepted_user_id: accepted_id)
-    end
-  end
 end

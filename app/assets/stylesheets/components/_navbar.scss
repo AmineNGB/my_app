@@ -1,6 +1,10 @@
+body {
+  background: rgb(135, 135, 241);
+}
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: transparent;
+
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -12,19 +16,19 @@
 }
 
 .hero-section {
-  background: url('https://plus.unsplash.com/premium_vector-1697729872436-1b413b945567?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+  // background: url('https://plus.unsplash.com/premium_vector-1697729872436-1b413b945567?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
   padding: 16px 0;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  // box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
 }
 
 .footer {
-  background: #F4F4F4;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100px;
   padding: 0px 50px;
-  color: rgba(0,0,0,0.3);
+  color: rgba(0,0,0,0.8);
 }
 .footer-links {
   display: flex;
@@ -137,4 +141,24 @@
 
 .notification .notification-actions a:hover {
   color: #555555;
+}
+
+/* 🌌 Style du fond spatial */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Derrière le contenu */
+  // background: radial-gradient(circle at center, #0a0a2a, #010106); /* Dégradé spatial */
+}
+
+/* 🌟 Style du contenu */
+.content {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }

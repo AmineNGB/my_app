@@ -1,6 +1,6 @@
 # Nettoyage de la base
 puts "Suppression des anciennes données..."
-AcceptedUser.destroy_all
+Exclusion.destroy_all
 Draw.destroy_all
 User.destroy_all
 Group.destroy_all
@@ -8,7 +8,7 @@ Group.destroy_all
 user_images_path = Rails.root.join('db', 'users')
 
 # Reset primary key sequence for each table (PostgreSQL syntax)
-ActiveRecord::Base.connection.reset_pk_sequence!("accepted_users")
+ActiveRecord::Base.connection.reset_pk_sequence!("exclusions")
 ActiveRecord::Base.connection.reset_pk_sequence!("users")
 ActiveRecord::Base.connection.reset_pk_sequence!("groups")
 
@@ -16,7 +16,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("groups")
 puts "Création des groupes..."
 group1 = Group.create!(name: "Famille Belgasmi larbi")
 group2 = Group.create!(name: "Famille Neghbel Amine")
-group3 = Group.create!(name: "Famille test")
+# group3 = Group.create!(name: "Famille test")
 
 # Création d'utilisateurs (H/F) pour chaque groupe
 puts "Ajout des utilisateurs..."
@@ -51,30 +51,6 @@ users_data.each do |user_data|
   #   puts "⚠️ Image not found: #{image_path}"
   # end
 end
-
-# Retrieve specific users from group3
-amine = User.find_by(email: "amine@test.com")
-sarah = User.find_by(email: "sarah@test.com")
-fatima = User.find_by(email: "fatima@test.com")
-illies = User.find_by(email: "illies@test.com")
-
-# Define specific accepted user relationships
-accepted_users_data = [
-  { user: amine, accepted_users: [sarah] },
-  { user: sarah, accepted_users: [amine, illies] },
-  { user: fatima, accepted_users: [illies] },
-  { user: illies, accepted_users: [sarah, fatima] }
-]
-
-# Create AcceptedUser records
-accepted_users_data.each do |entry|
-  user = entry[:user]
-  entry[:accepted_users].each do |accepted_user|
-    AcceptedUser.create!(user: user, accepted_user: accepted_user)
-  end
-end
-
-puts "✅ Specific AcceptedUsers relationships created successfully!"
 
 
 puts "✅ Données de test créées avec succès !"

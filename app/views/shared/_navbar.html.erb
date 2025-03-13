@@ -5,25 +5,27 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <h>
-      Tirage au sort Aid <%= Date.current.year.to_s %>
-    </h>
+   <%= link_to root_path, class: "navbar-brand text-center" do %>
+      <%= image_tag "logo", class: "avatar" %>
+    <% end %>
+    
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <div class="d-flex align-items-center">
-            <%= current_user.name %>
+            <p class="m-2"><%= current_user.name %></p>
             <li class="nav-item dropdown">
-            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "logo", class: "avatar", alt: "dropdown menu" %>
-            </a>
+              <a href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars fa-2x"></i>
+              </a>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <%= link_to "Mes préférences", edit_accepted_users_path, class: "dropdown-item" %>
+                <%= link_to "Accueil", root_path, class: "dropdown-item" %>
+                <%= link_to "Exclure des personnes", edit_exclusions_path, class: "dropdown-item" %>
 
-                <%= link_to "Modifier le compte", edit_user_registration_path(current_user), class: "dropdown-item" %>
+                <%# <%= link_to "Modifier le compte", edit_user_registration_path(current_user), class: "dropdown-item" %>
                 
-                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+                <%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
               </div>
             </li>
 

@@ -16,13 +16,16 @@
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css", media: "all" %>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   </head>
-  <body class="d-flex flex-column min-vh-100">
+  <body class="content d-flex flex-column min-vh-100">
+    <div id="particles-js"></div>
     <%= render "shared/navbar" %>
-    <header class="hero-section text-white text-center">
-      <div class="container">
+    <header class="hero-section h-80 text-center">
+      <div class="container mt-5">
         <h1 class="display-4">Bienvenue sur Secret Aïd 🌙</h1>
-        <p class="lead">Organisez facilement un tirage au sort HALAL pour votre échange de cadeaux !</p>
+        <p class="lead">Organisez facilement un tirage au sort pour votre échange de cadeaux !</p>
       </div>
     </header>
     <main class="flex-grow-1 d-flex">
