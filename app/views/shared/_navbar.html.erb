@@ -1,39 +1,27 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
+    <%= link_to "#", class: "navbar-brand" do %>
+      <%= image_tag  asset_path('logo.svg'), class: "avatar" %>
+    <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-   <%= link_to root_path, class: "navbar-brand text-center" do %>
-      <%= image_tag "logo.svg", class: "avatar" %>
-    <% end %>
-    
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <div class="d-flex align-items-center">
-            <p class="m-2"><%= current_user.name %></p>
-            <li class="nav-item dropdown">
-              <a href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bars fa-2x"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <%= link_to "Accueil", root_path, class: "dropdown-item" %>
-                <%= link_to "Exclure des personnes", edit_exclusions_path, class: "dropdown-item" %>
 
-                <%# <%= link_to "Modifier le compte", edit_user_registration_path(current_user), class: "dropdown-item" %>
-                
-                <%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-              </div>
-            </li>
-
-          </div>
-         
+          <li class="nav-item dropdown">
+            <%= link_to "Accueil", root_path, class: "dropdown-item" %>
+            <%= link_to "Exclure des personnes", edit_exclusions_path, class: "dropdown-item" %>
+              <%# <%= link_to "Modifier le compte", edit_user_registration_path(current_user), class: "dropdown-item" %>
+            <%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            </div>
+          </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Se connecter", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>
