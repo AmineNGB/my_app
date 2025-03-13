@@ -13,7 +13,7 @@
 </div>
 <% end %>
 
-<div class=" text-center">
+<div class="text-center">
   <% if @draw.nil? %>
     <!-- Message si le tirage n'a pas encore eu lieu -->
     <div class="empty-draw">
@@ -26,19 +26,19 @@
     </div>
   <% else %>
     <!-- Affichage du tirage -->
-    <h2>Salam <%= current_user.name%></h2>
-    <h2>Tu offres un cadeau à <%= @draw.recipient.name %> </h2>
-    <div class="draw-card">
-      <div class="user">
-        <% if @draw.recipient.avatar.attached? %>
-          <%= cl_image_tag(@draw.recipient.avatar.key, transformation: [
-            {gravity: "face", height: 200, width: 200, crop: "thumb"},
-            {radius: "max"},
-            {fetch_format: "auto"}
-            ])%>
-        <% end%>
-
-      </div>
+    <% if @draw.recipient.avatar.attached? %>
+      <%= cl_image_tag(@draw.recipient.avatar.key, transformation: [
+        {gravity: "face", height: 200, width: 200, crop: "thumb"},
+        {radius: "max"},
+        {fetch_format: "auto"}
+        ])%>
+    <% else %>
+      <%= image_tag "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=2034&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", width: 200, height: 200 %>
+    <% end %>
+    <div class="mt-4">
+      <h2>Salam <%= current_user.name%></h2>
+      <h2>Tu offres un cadeau à</h2>
+      <h2><%= @draw.recipient.name %></h2>
     </div>
   <% end %>
 </div>
