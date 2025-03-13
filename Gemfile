@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby '3.2.4' # or any stable version >= 3.2
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2", ">= 7.2.2.1"
@@ -63,5 +64,3 @@ end
 gem "devise"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "cloudinary"
-
-
