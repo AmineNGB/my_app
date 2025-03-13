@@ -44,12 +44,12 @@ users_data = [
 
 users_data.each do |user_data|
   user = User.create!(user_data.reject { |d| d == :image})
-  # image_path = user_images_path.join(user_data[:image])
-  # if File.exist?(image_path)
-  #   user.avatar.attach(io: File.open(image_path), filename: user_data[:image])
-  # else
-  #   puts "⚠️ Image not found: #{image_path}"
-  # end
+  image_path = user_images_path.join(user_data[:image])
+  if File.exist?(image_path)
+    user.avatar.attach(io: File.open(image_path), filename: user_data[:image])
+  else
+    puts "⚠️ Image not found: #{image_path}"
+  end
 end
 
 

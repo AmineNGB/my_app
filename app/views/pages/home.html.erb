@@ -13,8 +13,7 @@
 </div>
 <% end %>
 
-
-<div class=" text-center mt-5">
+<div class=" text-center">
   <% if @draw.nil? %>
     <!-- Message si le tirage n'a pas encore eu lieu -->
     <div class="empty-draw">
@@ -32,9 +31,12 @@
     <div class="draw-card">
       <div class="user">
         <% if @draw.recipient.avatar.attached? %>
-          <%= cl_image_tag @draw.recipient.avatar.key, style: "width: 350px; height: auto; object-fit: cover; border-radius: 10px;" %>
+          <%= cl_image_tag(@draw.recipient.avatar.key, transformation: [
+            {gravity: "face", height: 200, width: 200, crop: "thumb"},
+            {radius: "max"},
+            {fetch_format: "auto"}
+            ])%>
         <% end%>
-        <p><strong><%= @draw.recipient.name %></strong></p>
 
       </div>
     </div>
