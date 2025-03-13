@@ -1,22 +1,22 @@
 
 <h2>Connexion</h2>
+<div class="container">
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: false,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" } %>
+      <%= f.input :password,
+                  label: "Mot de passe",
+                  required: false,
+                  input_html: { autocomplete: "current-password" } %>
+      <%# <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    </div>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                label: "Mot de passe",
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%# <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
-
-  <div class="form-actions text-center">
-    <%= f.button :submit, "Je me connecte", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
+    <div class="form-actions text-center">
+      <%= f.button :submit, "Je me connecte", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
 <%# <%= render "devise/shared/links" %>

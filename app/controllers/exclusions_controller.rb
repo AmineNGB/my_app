@@ -3,7 +3,7 @@ class ExclusionsController < ApplicationController
 
   def edit
     @users = User.where.not(id: current_user.id)
-                 .where(group_id: current_user.group_id)
+                 .where(group_id: current_user.group_id).order(:id)
     @exclusion_ids = current_user.excluded_users.pluck(:id)
   end
 

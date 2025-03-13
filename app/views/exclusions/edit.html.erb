@@ -1,4 +1,6 @@
-<h2>Choisissez les personnes à qui vous NE voulez pas faire de cadeau ET qui ne vous en feront pas !</h2>
+<div class="container">
+
+<h2 style="text-align: justify;">Choisissez les personnes à qui vous NE voulez pas faire de cadeau ET qui ne vous en feront pas !</h2>
 
 <%= form_with url: exclusions_path, method: :patch do %>
   <div class="list-group">
@@ -13,3 +15,4 @@
   <%= link_to "Retour", root_path, class: "btn btn-secondary mt-3" %>
   <%= submit_tag "Enregistrer", class: "btn btn-primary mt-3" %>
 <% end %>
+</div>
