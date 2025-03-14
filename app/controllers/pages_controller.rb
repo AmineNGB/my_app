@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @draw = current_user.draw
-    @group = current_user.group
+    @draws = current_user.draws.includes(:group).order("groups.id")
   end
 end

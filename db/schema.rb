@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_03_162307) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_14_133150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_162307) do
     t.index ["user_id"], name: "index_exclusions_on_user_id"
   end
 
+  create_table "group_memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_memberships_on_group_id"
+    t.index ["user_id"], name: "index_group_memberships_on_user_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -72,7 +81,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_162307) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "gender"
-    t.bigint "group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -81,7 +89,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_162307) do
     t.boolean "only_same_gender", default: false
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["group_id"], name: "index_users_on_group_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -91,5 +98,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_162307) do
   add_foreign_key "draws", "users", column: "recipient_id"
   add_foreign_key "exclusions", "users"
   add_foreign_key "exclusions", "users", column: "excluded_user_id"
-  add_foreign_key "users", "groups"
+  add_foreign_key "group_memberships", "groups"
+  add_foreign_key "group_memberships", "users"
 end

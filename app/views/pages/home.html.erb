@@ -1,20 +1,5 @@
-
-<% if false%>
-<div class="notification">
-  <div class="notification-content">
-    <p><small>Première étape</small></p>
-    <p>Modifier les préférences de ton compte avant le tirage au sort.</p>
-    <ul>
-      <li><small>Tu peux choisir de tirer aux sorts uniquement le même genre que toi.</small></li>
-      <li><small>Tu peux choisir de ne pas tirer aux sorts les gens par alliance (ex: la belle-soeur).</small></li>
-    </ul>
-  </div>
-  <%= link_to "Modifier les préférences de ton compte", edit_user_registration_path(current_user), class: "btn btn-secondary" %>
-</div>
-<% end %>
-
-<div class="text-center">
-  <% if @draw.nil? %>
+<div class="d-flex text-center">
+  <% if @draws.empty? %>
     <!-- Message si le tirage n'a pas encore eu lieu -->
     <div class="empty-draw">
       <i class="bi bi-question-circle"></i>
@@ -22,27 +7,38 @@
       <p>Revenez plus tard pour voir votre receveur !</p>  
       <p>Profites-en pour faire tes réglages : </p><br>
       <%= link_to "Ne pas choisir certaines personnes", edit_exclusions_path, class: "btn btn-secondary" %>
-
     </div>
   <% else %>
-    <!-- Affichage du tirage -->
-    <% if @draw.recipient.avatar.attached? %>
-      <%= cl_image_tag(@draw.recipient.avatar.key, transformation: [
-        {gravity: "face", height: 200, width: 200, crop: "thumb"},
-        {radius: "max"},
-        {fetch_format: "auto"}
-        ])%>
-    <% else %>
-      <%= image_tag "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=2034&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", width: 200, height: 200 %>
-    <% end %>
-    <div class="mt-4">
-      <h2>Salam <%= current_user.name%></h2>
-      <h2>Tu offres un cadeau à</h2>
-      <h2><%= @draw.recipient.name %></h2>
+    <div class="container mt-3">
+      <div class="row">
+        <% @draws.each do |draw| %>
+          <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm p-3 text-center" style="background: rgba(193, 188, 172);">
+              <!-- Image du destinataire -->
+              <% if draw.recipient.avatar.attached? %>
+                <%= cl_image_tag(draw.recipient.avatar.key, transformation: [
+                    {gravity: "face", height: 200, width: 200, crop: "thumb"},
+                    {radius: "max"},
+                    {fetch_format: "auto"}
+                  ], class: "img-fluid rounded-circle mx-auto d-block") %>
+              <% else %>
+                <%= image_tag "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=2034&auto=format&fit=crop", 
+                  class: "img-fluid rounded-circle mx-auto d-block", width: 150, height: 150 %>
+              <% end %>
+
+              <!-- Informations du tirage -->
+              <div class="mt-3">
+                <h6 class="text-success"><strong>Tirage :</strong> <%= draw.group.name %></h6>
+                <p class="fw-bold">Tu offres un cadeau à :</p>
+                <h4 class="text-success"><%= draw.recipient.name %></h4>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0"></script>
 <script>

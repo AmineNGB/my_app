@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[7.2]
     create_table :users do |t|
       t.string :name
       t.string :gender
-      t.references :group, null: false, foreign_key: true
+      # t.references :group, null: false, foreign_key: true
 
       t.timestamps
     end
