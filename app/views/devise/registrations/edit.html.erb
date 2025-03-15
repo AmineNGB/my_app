@@ -1,48 +1,30 @@
-<h2>Modifier mon profil</h2>
+<div class="container">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), method: :patch) do |f| %>
-  <%= f.error_notification %>
+  <h2>Modifier mon profil</h2>
 
-  <div class="form-inputs">
-    <%= f.input :name, label: "Prénom Nom", required: true, autofocus: true %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), method: :patch) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :name, label: "Prénom Nom", required: true, autofocus: true %>
 
-    <%= f.input :email, label: "adresse e-mail", required: true, input_html: { autocomplete: "email" } %>
+      <%= f.input :password,
+                  label: "mot de passe",
+                  hint: "Laissez vide si vous ne souhaitez pas le changer", 
+                  input_html: { autocomplete: "new-password" } %>
 
-    <%= f.input :password,
-                label: "mot de passe",
-                hint: "Laissez vide si vous ne souhaitez pas le changer", 
-                input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation, 
+                  label: "Confirmer le mot de passe",
+                  
+                  input_html: { autocomplete: "new-password" } %>
 
-    <%= f.input :password_confirmation, 
-                label: "Confirmer le mot de passe",
-                
-                input_html: { autocomplete: "new-password" } %>
+      <%= f.input :avatar, as: :file, required: false %>
 
-    <%= f.input :avatar, as: :file, required: false %>
+    </div>
 
-    <!-- Ajout du champ gender avec un select -->
-    <small>Homme ou Femme ?</small>
+    <div class="form-actions">
+      <%= f.button :submit, "Mettre à jour", class: "btn btn-primary mb-2" %>
+    </div>
+  <% end %>
+</div>
 
-    <%= f.input :gender, label: false, as: :select, collection: [["Homme", "H"], ["Femme", "F"]], required: true %>
-
-    <!-- Ajout du champ only_same_gender avec un select -->
-    <small>Tirer au sort uniquement le même genre que moi ?</small>
-    <%= f.input :only_same_gender, label: false, as: :select, collection: [["Oui", true], ["Non", false]], required: true %>
-
-    <!-- Ajout du champ relation_type avec un select -->
-    <small>Certaines personnes peuvent être mal à l'aise concernant le fait d'offrir à une personne par alliance.</small><br>
-    <small><strong>Familiale :</strong> Tirage au sort uniquement dans la famille directe.</small><br>
-    <small><strong>Alliance :</strong> Exemple : le mari de ma sœur ou la femme de mon frère.</small><br>
-    <%= f.input :relation_type, label: false, as: :select, collection: [["Familiale", 0], ["Alliance", 1]], required: true %>
-    <%= f.input :current_password,
-                label: "Mot de passe Actuel",
-                
-                hint: "Obligatoire pour valider les modifications", 
-                input_html: { autocomplete: "current-password" } %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Mettre à jour", class: "btn btn-primary mb-2" %>
-  </div>
-<% end %>
 

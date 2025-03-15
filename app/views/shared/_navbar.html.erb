@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag  asset_path('logo.svg'), class: "avatar" %>
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/be2ad6ff-81ec-4977-b1bd-ca15a648dd2c/d4k5kfq-acb86141-2dfe-43f8-8f25-a30c722910a5.jpg/v1/fill/w_1131,h_707,q_70,strp/falcon_logo___bloody_monday_j_drama_by_ennuh_d4k5kfq-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTYwMCIsInBhdGgiOiJcL2ZcL2JlMmFkNmZmLTgxZWMtNDk3Ny1iMWJkLWNhMTVhNjQ4ZGQyY1wvZDRrNWtmcS1hY2I4NjE0MS0yZGZlLTQzZjgtOGYyNS1hMzBjNzIyOTEwYTUuanBnIiwid2lkdGgiOiI8PTI1NjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.c5BhWuoa2LroCzP1_AcLVcGax7ACGZ8Ch-7eDb8LeJw", class: "rounded" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,8 @@
             <%= link_to "Accueil", root_path, class: "dropdown-item" %>
             <%= link_to "Exclure des personnes", edit_exclusions_path, class: "dropdown-item" %>
               <%# <%= link_to "Modifier le compte", edit_user_registration_path(current_user), class: "dropdown-item" %>
+              
+            <%= link_to "Mon profil", edit_user_registration_path, class: "dropdown-item" %>
             <%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

@@ -1,18 +1,20 @@
 <div class="container">
 
-<h2 style="text-align: justify;">Choisissez les personnes à qui vous NE voulez pas faire de cadeau ET qui ne vous en feront pas !</h2>
+  <h3 class="m-3 my-5" style="text-align: justify;">
+    Choisis les personnes à qui tu NE veux pas faire de cadeau ET qui ne t'en fera pas !
+  </h3>
 
-<%= form_with url: exclusions_path, method: :patch do %>
-  <div class="list-group">
-    <% @users.each do |user| %>
-      <label class="list-group-item">
-        <%= check_box_tag "exclusion_ids[]", user.id, @exclusion_ids.include?(user.id) %>
-        <%= user.name %>
-      </label>
-    <% end %>
-  </div>
+  <%= form_with url: exclusions_path, method: :patch do %>
+    <div class="list-group">
+      <% @users.each do |user| %>
+        <label class="list-group-item"  style="background: rgba(193, 188, 172);">
+          <%= check_box_tag "exclusion_ids[]", user.id, @exclusion_ids.include?(user.id) %>
+          <%= user.name %>
+        </label>
+      <% end %>
+    </div>
 
-  <%= link_to "Retour", root_path, class: "btn btn-secondary mt-3" %>
-  <%= submit_tag "Enregistrer", class: "btn btn-primary mt-3" %>
-<% end %>
+    <%= link_to "Retour", root_path, class: "btn btn-secondary mt-3" %>
+    <%= submit_tag "Enregistrer", class: "btn btn-primary mt-3" %>
+  <% end %>
 </div>

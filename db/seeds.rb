@@ -52,6 +52,7 @@ users_data = [
   { name: "Ines Belgasmi", gender: "F", relation_type: 1, email: "ines@belgasmi.com", password: "Ines2025", only_same_gender: true, image: 'ines.jpeg', groups: [group2] },
   { name: "Myriam Belgasmi", gender: "F", relation_type: 1, email: "myriam@belgasmi.com", password: "Myriam2025", only_same_gender: true, image: 'myriam.jpeg', groups: [group2] },
   { name: "Kiyane Belgasmi", gender: "F", relation_type: 1, email: "kiyane@belgasmi.com", password: "Kiyane2025", only_same_gender: true, image: 'kiyane.jpeg', groups: [group2] },
+  { name: "Romane Belgasmi", gender: "F", relation_type: 1, email: "romane@belgasmi.com", password: "Romane2025", only_same_gender: true, image: 'romane.jpeg', groups: [group2] },
   { name: "Minane Belgasmi", gender: "F", relation_type: 1, email: "minane@belgasmi.com", password: "Minane2025", only_same_gender: true, image: 'minane.jpeg', groups: [group2] },
   { name: "Wafa Alem", gender: "F", relation_type: 1, email: "wafa@alem.com", password: "Wafa2025", only_same_gender: true, image: 'wafa.jpeg', groups: [group2] },
   { name: "Norhane Alem", gender: "F", relation_type: 1, email: "norhane@alem.com", password: "Norhane2025", only_same_gender: true, image: 'norhane.jpeg', groups: [group2] },

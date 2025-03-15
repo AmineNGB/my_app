@@ -1,12 +1,18 @@
-<div class="d-flex text-center">
+<header class="hero-section h-80 text-center">
+  <div class="container mt-5">
+    <h1 class="display-4">Bienvenue sur Secret Aïd 🌙</h1>
+    <p class="lead">Organisez facilement un tirage au sort pour votre échange de cadeaux !</p>
+  </div>
+</header>
+<div class="d-flex justify-content-center text-center">
   <% if @draws.empty? %>
     <!-- Message si le tirage n'a pas encore eu lieu -->
     <div class="empty-draw">
-      <i class="bi bi-question-circle"></i>
+      <%= image_tag  "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExenZ4eW5lOTl5bTFhZTJhNmlwNGdyNDI2N2ZuYjFzODNnbzFncHVjYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QBd2kLB5qDmysEXre9/giphy.gif", class: "rounded", width: 220, height: :auto %>
       <h2>Le tirage n'a pas encore eu lieu</h2>
-      <p>Revenez plus tard pour voir votre receveur !</p>  
-      <p>Profites-en pour faire tes réglages : </p><br>
-      <%= link_to "Ne pas choisir certaines personnes", edit_exclusions_path, class: "btn btn-secondary" %>
+      <p>Reviens plus tard pour voir ton receveur&nbsp;!</p>  
+      <p>Profites-en pour faire tes réglages&nbsp;:&nbsp;</p><br>
+      <%= link_to "Exclure certaines personnes", edit_exclusions_path, class: "btn btn-secondary" %>
     </div>
   <% else %>
     <div class="container mt-3">

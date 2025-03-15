@@ -22,19 +22,11 @@
   <body class="content d-flex flex-column min-vh-100">
     <div id="particles-js"></div>
     <%= render "shared/navbar" %>
-    <header class="hero-section h-80 text-center">
-      <div class="container mt-5">
-        <h1 class="display-4">Bienvenue sur Secret Aïd 🌙</h1>
-        <p class="lead">Organisez facilement un tirage au sort pour votre échange de cadeaux !</p>
-      </div>
-    </header>
     <main class="flex-grow-1 d-flex">
-      
       <div class="w-100 align-content-center">
         <%= yield %>
       </div>
     </main>
-
     <%= render "shared/footer" %>
     <%= render "shared/flashes" %>
   </body>
