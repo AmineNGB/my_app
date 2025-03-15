@@ -46,7 +46,7 @@ users_data = [
   { name: "Fares Alem", gender: "H", relation_type: 1, email: "fares@alem.com", password: "Fares2025", only_same_gender: true, image: 'fares.jpeg', groups: [group2] },
   { name: "Zineb Belgasmi", gender: "F", relation_type: 1, email: "zineb@belgasmi.com", password: "Zineb2025", only_same_gender: true, image: 'zineb.jpeg', groups: [group2] },
   { name: "Ahlem Belgasmi", gender: "F", relation_type: 1, email: "ahlem@belgasmi.com", password: "Ahlem2025", only_same_gender: true, image: 'ahlem.jpeg', groups: [group2] },
-  { name: "Hayet Belgasmi", gender: "F", relation_type: 1, email: "hayet@belgasmi.com", password: "Hayet2025", only_same_gender: true, image: 'hayet.jpeg', groups: [group2] },
+  { name: "Haiet Belgasmi", gender: "F", relation_type: 1, email: "haiet@belgasmi.com", password: "Haiet2025", only_same_gender: true, image: 'haiet.jpeg', groups: [group2] },
   { name: "Saliha Belgasmi", gender: "F", relation_type: 1, email: "saliha@belgasmi.com", password: "Saliha2025", only_same_gender: true, image: 'saliha.jpeg', groups: [group2] },
   { name: "Nabila Belgasmi", gender: "F", relation_type: 1, email: "nabila@belgasmi.com", password: "Nabila2025", only_same_gender: true, image: 'nabila.jpeg', groups: [group2] },
   { name: "Ines Mohamadi", gender: "F", relation_type: 1, email: "ines@mohamadi.com", password: "Ines2025", only_same_gender: true, image: 'ines.jpeg', groups: [group2] },
