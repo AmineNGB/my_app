@@ -28,4 +28,13 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+   activerecord:
+    attributes:
+      user:
+        name: "Nom"  # Change "name" en "Nom"
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "ne peut pas être vide"

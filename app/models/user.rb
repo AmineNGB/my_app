@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   enum relation_type: { family: 0, by_marriage: 1 }
 
+  validates :name, presence: { message: "ne peut pas être vide" }
   validates :gender, presence: true
   validates :relation_type, presence: true
 end

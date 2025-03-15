@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   namespace :admin do
     resources :groups, only: [:index, :show] do
