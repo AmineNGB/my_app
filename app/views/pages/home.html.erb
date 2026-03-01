@@ -102,7 +102,7 @@
             <% if !group.users.include?(current_user) %>
               <%= button_to "Rejoindre le groupe", join_group_path(group), method: :post, class: "btn btn-primary w-75 mb-2" %>
             <% elsif !draw_done %>
-              <%= button_to "Quitter le groupe", leave_group_path(group), method: :post, class: "btn btn-outline-danger w-75 mb-2" %>
+              <%= button_to "Quitter le groupe", leave_group_path(group), method: :post, class: "btn btn-outline-danger w-75 mb-2", data: { confirm: "Es-tu sûr de vouloir quitter ce groupe ?" } %>
             <% end %>
           </div>
 
