@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :groups, only: [] do
     member do
       post :join
+      post :leave
     end
   end
 end
