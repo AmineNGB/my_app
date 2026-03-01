@@ -66,3 +66,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "cloudinary"
 
 gem "faker", "~> 3.6"
+
+gem "dockerfile-rails", ">= 1.7", :group => :development
+
+gem "aws-sdk-s3", "~> 1.213", :require => false
