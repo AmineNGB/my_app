@@ -102,8 +102,30 @@
             <% if !group.users.include?(current_user) %>
               <%= button_to "Rejoindre le groupe", join_group_path(group), method: :post, class: "btn btn-primary w-75 mb-2" %>
             <% elsif !draw_done %>
-              <%= button_to "Quitter le groupe", leave_group_path(group), method: :post, class: "btn btn-outline-danger w-75 mb-2", data: { confirm: "Es-tu sûr de vouloir quitter ce groupe ?" } %>
-            <% end %>
+              <%= button_tag "Quitter le groupe", type: "button",
+                    class: "btn btn-outline-danger w-75 mb-2",
+                    data: { bs_toggle: "modal", bs_target: "#leaveGroupModal-#{group.id}" } %>
+                  <% end %>
+
+                  <div class="modal fade" id="leaveGroupModal-<%= group.id %>" tabindex="-1" aria-labelledby="leaveGroupModalLabel-<%= group.id %>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="leaveGroupModalLabel-<%= group.id %>">Confirmer la sortie</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body">
+                          Es-tu sûr de vouloir quitter le groupe "<%= group.name %>" ?
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                          <%= button_to "Quitter le groupe", leave_group_path(group),
+                                method: :post,
+                                class: "btn btn-danger" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
           </div>
 
         </div>
@@ -111,3 +133,4 @@
     <% end %>
   </div>
 </div>
+
