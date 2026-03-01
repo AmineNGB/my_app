@@ -5,6 +5,35 @@
     <p class="lead">Organisez facilement un tirage au sort pour votre échange de cadeaux !</p>
   </header>
 
+  <div class="row justify-content-center mb-5">
+  <div class="col-12 col-md-10 col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+
+      <div class="d-flex align-items-center mb-3">
+        <div>
+          <h4 class="fw-bold mb-1"> 🚫 Gérer mes exclusions</h4>
+          <p class="text-muted mb-2">
+            Indiquez les personnes à qui vous ne souhaitez 
+            <strong>ni offrir</strong> ni <strong>recevoir</strong> de cadeau.
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-unstyled mb-4 small text-muted">
+        <li>• Le nombre d'exclusions est limité au nombre de participants du <strong>genre opposé</strong>.</li>
+        <li>• Vous pouvez modifier vos exclusions à tout moment avant le tirage.</li>
+      </ul>
+
+      <div class="text-center">
+        <%= link_to edit_exclusions_path, class: "btn btn-primary btn-lg rounded-3 px-4" do %>
+          ✏️ Modifier mes exclusions
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
   <div class="row g-4">
     <% @groups.each do |group| %>
       <% user_draw = @draws.find { |d| d.group_id == group.id && d.user_id == current_user.id } %>
