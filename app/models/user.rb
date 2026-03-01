@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable
 
   has_one_attached :avatar
   has_many :exclusions, dependent: :destroy
@@ -16,7 +16,17 @@ class User < ApplicationRecord
 
   enum relation_type: { family: 0, by_marriage: 1 }
 
-  validates :name, presence: { message: "ne peut pas être vide" }
+  validates :username, presence: true, uniqueness: true
+  validates :avatar, presence: true
+
   validates :gender, presence: true
   validates :relation_type, presence: true
+
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
 end

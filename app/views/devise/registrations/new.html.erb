@@ -1,44 +1,72 @@
-<h2>Créer un compte</h2>
+<div class="container d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 480px;">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Créer un compte</h2>
+      <p class="text-muted small mb-0">Rejoins l'aventure 🎁</p>
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :name, required: true, autofocus: true %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
 
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+      <%= f.error_notification %>
 
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
+      <div class="mb-3">
+        <%= f.label :username, "Nom d'utilisateur", class: "form-label fw-semibold" %>
+        <%= f.text_field :username,
+              autofocus: true,
+              class: "form-control form-control-lg rounded-3",
+              placeholder: "Choisis un username" %>
+      </div>
 
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+      <div class="mb-3">
+        <%= f.label :password, "Mot de passe", class: "form-label fw-semibold" %>
+        <%= f.password_field :password,
+              class: "form-control form-control-lg rounded-3",
+              placeholder: "••••••••",
+              autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+          <div class="form-text">
+            <%= @minimum_password_length %> caractères minimum
+          </div>
+        <% end %>
+      </div>
 
-    <%= f.input :avatar, as: :file, required: true %>
+      <div class="mb-3">
+        <%= f.label :password_confirmation, "Confirmer le mot de passe", class: "form-label fw-semibold" %>
+        <%= f.password_field :password_confirmation,
+              class: "form-control form-control-lg rounded-3",
+              placeholder: "••••••••",
+              autocomplete: "new-password" %>
+      </div>
 
-    <!-- Ajout du champ gender avec un select -->
-    <%= f.input :gender, as: :select, collection: [["Homme", "H"], ["Femme", "F"]], required: true %>
+      <div class="mb-3">
+        <%= f.label :avatar, "Photo de profil", class: "form-label fw-semibold" %>
+        <%= f.file_field :avatar,
+              class: "form-control rounded-3" %>
+      </div>
 
-    <!-- Ajout du champ only_same_gender avec un select -->
-    <small>Tirer au sort uniquement le même genre que moi</small>
-    <%= f.input :only_same_gender, as: :select, collection: [["Oui", true], ["Non", false]], required: true %>
+      <div class="mb-4">
+        <%= f.label :gender, "Genre", class: "form-label fw-semibold" %>
+        <%= f.select :gender,
+              [["Homme", "H"], ["Femme", "F"]],
+              {},
+              class: "form-select form-select-lg rounded-3" %>
+      </div>
 
-    <!-- Ajout du champ relation_type avec un select -->
-    <small>Certaines personnes peuvent être mal à l'aise concernant le fait d'offir à une personne par alliance.</small>
-    <small>Familiale</small>
-    <small>Alliance : exemple le mari de ma soeur ou la femme de mon frère</small>
-    <%= f.input :relation_type, as: :select, collection: [["Familiale", 0], ["Alliance", 1]], required: true %>
+      <div class="d-grid">
+        <%= f.button :submit,
+              "Créer mon compte",
+              class: "btn btn-primary btn-lg rounded-3" %>
+      </div>
+
+      <div class="text-center mt-3">
+        <small class="text-muted">
+          Déjà un compte ?
+          <%= link_to "Se connecter", new_user_session_path, class: "fw-semibold text-decoration-none" %>
+        </small>
+      </div>
+
+    <% end %>
+
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
