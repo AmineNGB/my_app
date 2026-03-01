@@ -1,0 +1,30 @@
+fr:
+  simple_form:
+    "yes": 'Oui'
+    "no": 'Non'
+    required:
+      text: 'champ obligatoire'
+      mark: '*'
+    error_notification:
+      default_message: "Veuillez corriger les erreurs ci-dessous :"
+    labels:
+      defaults:
+        username: 'Nom d’utilisateur'
+        password: 'Mot de passe'
+        avatar: 'Photo de profil'
+        gender: 'Genre'
+    hints:
+      defaults:
+        username: 'Choisissez un nom unique'
+        password: 'Au moins 6 caractères'
+        avatar: 'Téléchargez une image pour votre profil'
+        gender: 'Sélectionnez votre genre'
+    errors:
+      messages:
+        blank: "ne peut pas être vide"
+        required: "est requis"
+      models:
+        user:
+          attributes:
+            avatar:
+              blank: "Veuillez sélectionner une photo de profil pour vous inscrire"

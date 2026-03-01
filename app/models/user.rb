@@ -17,10 +17,10 @@ class User < ApplicationRecord
   enum relation_type: { family: 0, by_marriage: 1 }
 
   validates :username, presence: true, uniqueness: true
-  validates :avatar, presence: true
 
   validates :gender, presence: true
   validates :relation_type, presence: true
+  validates :avatar, presence: { message: "Veuillez ajouter une photo de profil" }
 
   def email_required?
     false

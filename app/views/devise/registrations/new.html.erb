@@ -11,7 +11,7 @@
       <%= f.error_notification %>
 
       <div class="mb-3">
-        <%= f.label :username, "Nom d'utilisateur", class: "form-label fw-semibold" %>
+        <%= f.label :username, "Prénom + Nom", class: "form-label fw-semibold" %>
         <%= f.text_field :username,
               autofocus: true,
               class: "form-control form-control-lg rounded-3",
@@ -22,7 +22,7 @@
         <%= f.label :password, "Mot de passe", class: "form-label fw-semibold" %>
         <%= f.password_field :password,
               class: "form-control form-control-lg rounded-3",
-              placeholder: "••••••••",
+              placeholder: "******",
               autocomplete: "new-password" %>
         <% if @minimum_password_length %>
           <div class="form-text">
@@ -35,14 +35,15 @@
         <%= f.label :password_confirmation, "Confirmer le mot de passe", class: "form-label fw-semibold" %>
         <%= f.password_field :password_confirmation,
               class: "form-control form-control-lg rounded-3",
-              placeholder: "••••••••",
+              placeholder: "******",
               autocomplete: "new-password" %>
       </div>
 
       <div class="mb-3">
         <%= f.label :avatar, "Photo de profil", class: "form-label fw-semibold" %>
-        <%= f.file_field :avatar,
+        <%= f.file_field :avatar, required: true,
               class: "form-control rounded-3" %>
+         <%= f.error :avatar, class: "text-danger small mt-1" %>
       </div>
 
       <div class="mb-4">
