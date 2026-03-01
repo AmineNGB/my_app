@@ -19,7 +19,6 @@ class ExclusionsController < ApplicationController
 
     # Vérifier avant d'appliquer la requête SQL
     if (params[:exclusion_ids] || []).count > max_exclusions
-      # flash.now[:alert] = "Vous ne pouvez exclure que #{max_exclusions} utilisateurs au maximum."
 
       # Réinitialisation des variables pour éviter un bug avec `render :edit`
       @users = User.joins(:group_memberships)

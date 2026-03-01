@@ -22,9 +22,15 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :groups, only: [:index, :show] do
+    resources :groups, only: [ :index, :show ] do
       post :perform_draw, on: :member
     end
   end
-  resource :exclusions, only: [:edit, :update]
+  resource :exclusions, only: [ :edit, :update ]
+
+  resources :groups, only: [] do
+    member do
+      post :join
+    end
+  end
 end

@@ -1,20 +1,40 @@
-<div class="container">
+<div class="container my-5">
 
-  <h3 class="m-3 my-5" style="text-align: justify;">
-    Choisis les personnes à qui tu NE veux pas faire de cadeau ET qui ne t'en fera pas !
+  <h3 class="mb-4 text-center">
+    Choisis les personnes à qui tu <strong>NE veux pas faire de cadeau</strong> 
+    ET qui ne t'en feront pas !
   </h3>
 
   <%= form_with url: exclusions_path, method: :patch do %>
-    <div class="list-group">
+    <div class="row g-3">
       <% @users.each do |user| %>
-        <label class="list-group-item"  style="background: rgba(193, 188, 172);">
-          <%= check_box_tag "exclusion_ids[]", user.id, @exclusion_ids.include?(user.id) %>
-          <%= user.name %>
-        </label>
+        <div class="col-12 col-md-6 col-lg-4">
+          <label class="card p-3 h-100 d-flex align-items-center gap-3" style="cursor: pointer;">
+            
+            <!-- Avatar -->
+            <% if user.avatar.attached? %>
+              <%= cl_image_tag user.avatar.key, transformation: [
+                    {gravity: "face", height: 50, width: 50, crop: "thumb"},
+                    {radius: "max"},
+                    {fetch_format: "auto"}
+                  ], class: "rounded-circle" %>
+            <% else %>
+              <div class="rounded-circle bg-secondary" style="width:50px; height:50px;"></div>
+            <% end %>
+
+            <!-- Checkbox + Username -->
+            <div class="flex-grow-1">
+              <%= check_box_tag "exclusion_ids[]", user.id, @exclusion_ids.include?(user.id), id: "exclusion_#{user.id}", class: "form-check-input me-2" %>
+              <%= label_tag "exclusion_#{user.id}", user.username, class: "fw-semibold mb-0" %>
+            </div>
+          </label>
+        </div>
       <% end %>
     </div>
 
-    <%= link_to "Retour", root_path, class: "btn btn-secondary mt-3" %>
-    <%= submit_tag "Enregistrer", class: "btn btn-primary mt-3" %>
+    <div class="mt-4 d-flex justify-content-between">
+      <%= link_to "Retour", root_path, class: "btn btn-secondary" %>
+      <%= submit_tag "Enregistrer", class: "btn btn-primary" %>
+    </div>
   <% end %>
 </div>

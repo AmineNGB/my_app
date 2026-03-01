@@ -21,7 +21,7 @@ class DrawService
         recipient = find_valid_recipient(user, draws, taken)
 
         if recipient.nil?
-          raise "❌ Tirage bloqué pour #{user.name}, on recommence !"
+          raise "❌ Tirage bloqué pour #{user.username}, on recommence !"
         end
 
         draws[user] = recipient

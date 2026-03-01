@@ -1,23 +1,56 @@
-<div class="container">
-  <h2>🎁 Tirages pour le groupe <%= @group.name %></h2>
+<div class="container mt-5">
+  <div class="card shadow-sm p-4 rounded-4">
 
-  <table>
-    <thead>
-      <tr>
-        <th>Offrant</th>
-        <th>Reçoit un cadeau de</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @draws.each do |draw| %>
-        <tr>
-          <td><%= draw.user.name %></td>
-          <td><%= draw.recipient.name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <!-- Titre du groupe -->
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">🎁 Tirages pour le groupe <%= @group.name %></h2>
+      <p class="text-muted small mb-0">Qui offre à qui ?</p>
+    </div>
 
-  <%= button_to "🔄 Refaire le tirage", perform_draw_admin_group_path(@group), method: :post, data: { confirm: "Êtes-vous sûr de vouloir refaire le tirage ?" }, class: "btn btn-primary" %>
+    <!-- Liste des participants -->
+    <div class="mb-4">
+      <h5 class="fw-semibold mb-3">👥 Participants</h5>
+      <div class="d-flex flex-wrap gap-2">
+        <% @group.users.each do |user| %>
+          <div class="card bg-light p-2 text-center rounded-3" style="width: 120px;">
+            <% if user.avatar.attached? %>
+              <%= cl_image_tag user.avatar.key, width: 80, height: 80, crop: :fill, class: "rounded-circle mb-2" %>
+            <% else %>
+              <div class="rounded-circle bg-secondary mb-2" style="width:80px; height:80px;"></div>
+            <% end %>
+            <p class="mb-0 fw-medium small"><%= user.username %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
+    <!-- Tableau des tirages -->
+    <div class="table-responsive mb-4">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Offrant</th>
+            <th scope="col">Reçoit un cadeau de</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @draws.each do |draw| %>
+            <tr>
+              <td><%= draw.user.username %></td>
+              <td><%= draw.recipient.username %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bouton refaire le tirage -->
+    <div class="text-center">
+      <%= button_to "🔄 Refaire le tirage", perform_draw_admin_group_path(@group), 
+                    method: :post, 
+                    data: { confirm: "Êtes-vous sûr de vouloir refaire le tirage ?" },
+                    class: "btn btn-primary btn-lg rounded-3" %>
+    </div>
+
+  </div>
 </div>

@@ -1,79 +1,93 @@
-# Nettoyage de la base
-puts "Suppression des anciennes données..."
+# db/seeds.rb
+
+require "faker"
+
+puts "🔄 Nettoyage de la base..."
 Exclusion.destroy_all
 Draw.destroy_all
 GroupMembership.destroy_all
 User.destroy_all
 Group.destroy_all
 
-user_images_path = Rails.root.join('db', 'users')
-
-# Reset primary key sequence for PostgreSQL
+# Reset primary key sequence (PostgreSQL)
 %w[exclusions draws group_memberships users groups].each do |table|
   ActiveRecord::Base.connection.reset_pk_sequence!(table)
 end
 
-# Création des groupes
-puts "Création des groupes..."
-group1 = Group.create!(name: "Famille Belgasmi Larbi")
-group2 = Group.create!(name: "Loto Commun Belgasmi")
-
-# Création des utilisateurs et de leurs groupes
-puts "Ajout des utilisateurs..."
-
-users_data = [
-  # { name: "Larbi Belgasmi", gender: "H", relation_type: 1, email: "larbi@belgasmi.com", password: "Larbi2025", only_same_gender: true, image: 'larbi.jpeg', groups: [group1] },
-  # { name: "Soraya Belgasmi", gender: "F", relation_type: 0, email: "soraya@belgasmi.com", password: "Soraya2025", only_same_gender: true, image: 'soraya.jpeg', groups: [group1, group2] },
-  # { name: "Mohamed Belgasmi", gender: "H", relation_type: 0, email: "mohamed@belgasmi.com", password: "Mohamed2025", only_same_gender: true, image: 'mohamed.jpeg', groups: [group1, group2] },
-  # { name: "Ilies Belgasmi", gender: "H", relation_type: 0, email: "ilies@belgasmi.com", password: "Ilies2025", only_same_gender: true, image: 'ilies.jpeg', groups: [group1] },
-  # { name: "Imed Belgasmi", gender: "H", relation_type: 0, email: "imed@belgasmi.com", password: "Imed2025", only_same_gender: true, image: 'imed.jpeg', groups: [group1] },
-  # { name: "Djessim Belgasmi", gender: "H", relation_type: 0, email: "djessim@belgasmi.com", password: "Djessim2025", only_same_gender: true, image: 'djessim.jpeg', groups: [group1] },
-  # { name: "Sarah Belgasmi", gender: "F", relation_type: 0, email: "sarah@belgasmi.com", password: "Sarah2025", only_same_gender: true, image: 'sarah.jpeg', groups: [group1, group2] },
-  # { name: "Safa Belgasmi", gender: "F", relation_type: 0, email: "safa@belgasmi.com", password: "Safa2025", only_same_gender: true, image: 'safa.jpeg', groups: [group1, group2] },
-  # { name: "Maroy Belgasmi", gender: "F", relation_type: 1, email: "maroy@belgasmi.com", password: "Maroy2025", only_same_gender: true, image: 'maroy.jpeg', groups: [group1, group2] },
-  # { name: "Fatima Belgasmi", gender: "F", relation_type: 1, email: "fatima@belgasmi.com", password: "Fatima2025", only_same_gender: true, image: 'fatima.jpeg', groups: [group1] },
-  { username: "Amine Neghbel", gender: "H", relation_type: 1, password: "123456", only_same_gender: true, image: 'amine.jpeg', groups: [ group1, group2 ] } # Appartient aux 2 groupes
-
-  ## Loto commun
-  # { name: "Adam Belgasmi", gender: "H", relation_type: 1, email: "adam@belgasmi.com", password: "Adam2025", only_same_gender: true, image: 'adam.jpeg', groups: [group2] }, # Appartient aux 2 groupes
-  # { name: "Redha Belgasmi", gender: "H", relation_type: 1, email: "redha@belgasmi.com", password: "Redha2025", only_same_gender: true, image: 'redha.jpeg', groups: [group2] },
-  # { name: "Idriss Belgasmi", gender: "H", relation_type: 1, email: "idriss@belgasmi.com", password: "Idriss2025", only_same_gender: true, image: 'idriss.jpeg', groups: [group2] },
-  # { name: "Amine Mohamadi", gender: "H", relation_type: 1, email: "amine@mohamadi.com", password: "Amine2025", only_same_gender: true, image: 'amine_mohamadi.jpeg', groups: [group2] },
-  # { name: "Mehdi Mohamadi", gender: "H", relation_type: 1, email: "mehdi@mohamadi.com", password: "Mehdi2025", only_same_gender: true, image: 'mehdi_mohamadi.jpeg', groups: [group2] },
-  # { name: "Messaoud Mohamadi", gender: "H", relation_type: 1, email: "messaoud@mohamadi.com", password: "Messaoud2025", only_same_gender: true, image: 'messaoud.jpeg', groups: [group2] },
-  # { name: "Dylan Dahan", gender: "H", relation_type: 1, email: "dylan@dahan.com", password: "Dylan2025", only_same_gender: true, image: 'dylan.jpeg', groups: [group2] },
-  # { name: "Nadji Alem", gender: "H", relation_type: 1, email: "nadji@alem.com", password: "Nadji2025", only_same_gender: true, image: 'nadji.jpeg', groups: [group2] },
-  # { name: "Fares Alem", gender: "H", relation_type: 1, email: "fares@alem.com", password: "Fares2025", only_same_gender: true, image: 'fares.jpeg', groups: [group2] },
-  # { name: "Zineb Belgasmi", gender: "F", relation_type: 1, email: "zineb@belgasmi.com", password: "Zineb2025", only_same_gender: true, image: 'zineb.jpeg', groups: [group2] },
-  # { name: "Ahlem Belgasmi", gender: "F", relation_type: 1, email: "ahlem@belgasmi.com", password: "Ahlem2025", only_same_gender: true, image: 'ahlem.jpeg', groups: [group2] },
-  # { name: "Haiet Belgasmi", gender: "F", relation_type: 1, email: "haiet@belgasmi.com", password: "Haiet2025", only_same_gender: true, image: 'haiet.jpeg', groups: [group2] },
-  # { name: "Saliha Belgasmi", gender: "F", relation_type: 1, email: "saliha@belgasmi.com", password: "Saliha2025", only_same_gender: true, image: 'saliha.jpeg', groups: [group2] },
-  # { name: "Nabila Belgasmi", gender: "F", relation_type: 1, email: "nabila@belgasmi.com", password: "Nabila2025", only_same_gender: true, image: 'nabila.jpeg', groups: [group2] },
-  # { name: "Ines Mohamadi", gender: "F", relation_type: 1, email: "ines@mohamadi.com", password: "Ines2025", only_same_gender: true, image: 'ines.jpeg', groups: [group2] },
-  # { name: "Myriam Mohamadi", gender: "F", relation_type: 1, email: "myriam@mohamedi.com", password: "Myriam2025", only_same_gender: true, image: 'myriam.jpeg', groups: [group2] },
-  # { name: "Kiyane Belgasmi", gender: "F", relation_type: 1, email: "kiyane@belgasmi.com", password: "Kiyane2025", only_same_gender: true, image: 'kiyane.jpeg', groups: [group2] },
-  # { name: "Romane Belgasmi", gender: "F", relation_type: 1, email: "romane@belgasmi.com", password: "Romane2025", only_same_gender: true, image: 'romane.jpeg', groups: [group2] },
-  # { name: "Minane Belgasmi", gender: "F", relation_type: 1, email: "minane@belgasmi.com", password: "Minane2025", only_same_gender: true, image: 'minane.jpeg', groups: [group2] },
-  # { name: "Wafa Alem", gender: "F", relation_type: 1, email: "wafa@alem.com", password: "Wafa2025", only_same_gender: true, image: 'wafa.jpeg', groups: [group2] },
-  # { name: "Norhane Alem", gender: "F", relation_type: 1, email: "norhane@alem.com", password: "Norhane2025", only_same_gender: true, image: 'norhane.jpeg', groups: [group2] },
-  # { name: "Amel Belgasmi", gender: "F", relation_type: 1, email: "amel@belgasmi.com", password: "Amel2025", only_same_gender: true, image: 'amel.jpeg', groups: [group2] },
-  # { name: "Lina Soualmi", gender: "F", relation_type: 1, email: "lina@soualmi.com", password: "Lina2025", only_same_gender: true, image: 'lina.jpeg', groups: [group2] },
+puts "🎯 Création des groupes..."
+groups = [
+  Group.create!(name: "Famille Belgasmi"),
+  Group.create!(name: "Loto Commun"),
+  Group.create!(name: "Collègues de bureau"),
+  Group.create!(name: "Amis proches")
 ]
 
-users_data.each do |user_data|
-  groups = user_data.delete(:groups) # Retirer les groupes du hash avant la création
-  user = User.create!(user_data.except(:image)) # Créer l'utilisateur
+puts "👤 Création des utilisateurs..."
 
-  # Associer l'utilisateur aux groupes
-  groups.each { |group| GroupMembership.create!(user: user, group: group) }
+# Chemin pour les images d'avatars
+user_images_path = Rails.root.join('db', 'users')
+avatar_files = Dir.entries(user_images_path).select { |f| f =~ /\.(jpg|jpeg|png)$/i }
 
-  # Assigner l'avatar
-  image_path = user_images_path.join(user_data[:image])
-  if File.exist?(image_path)
-    user.avatar.attach(io: File.open(image_path), filename: user_data[:image])
-  else
-    puts "⚠️ Image introuvable : #{image_path}"
+users = []
+
+20.times do |i|
+  gender = ["H", "F"].sample
+  username = Faker::Name.first_name + " " + Faker::Name.last_name
+  user = User.new(
+    username: username,
+    gender: gender,
+    relation_type: [0, 1].sample,
+    password: "123456",
+    only_same_gender: [true, false].sample
+  )
+
+  # Attacher un avatar aléatoire
+  avatar_file = avatar_files.sample
+  if avatar_file
+    user.avatar.attach(io: File.open(user_images_path.join(avatar_file)), filename: avatar_file)
+  end
+
+  # Sauvegarde
+  user.save!
+  users << user
+end
+
+puts "✅ #{users.count} utilisateurs créés."
+
+puts "➕ Attribution des utilisateurs aux groupes..."
+users.each do |user|
+  groups.sample(rand(1..2)).each do |group|
+    group.users << user unless group.users.include?(user)
   end
 end
 
-puts "✅ Données de test créées avec succès !"
+groups.each do |group|
+  puts "📌 Groupe '#{group.name}' a #{group.users.count} participants."
+end
+
+puts "⚠️ Création d'exclusions aléatoires..."
+users.each do |user|
+  other_users = users - [user]
+  excluded = other_users.sample(rand(0..3))
+  excluded.each do |ex_user|
+    Exclusion.create!(user: user, excluded_user: ex_user)
+  end
+end
+
+puts "🎲 Création de tirages pour certains groupes..."
+groups.each do |group|
+  next if group.users.count < 2 # Au moins 2 participants pour un tirage
+
+  if [true, false].sample
+    shuffled = group.users.shuffle
+    shuffled.each_with_index do |u, idx|
+      recipient = shuffled[(idx + 1) % shuffled.size]
+      Draw.create!(user: u, recipient: recipient, group: group)
+    end
+    puts "✅ Tirage créé pour le groupe '#{group.name}'"
+  else
+    puts "⏳ Pas encore de tirage pour le groupe '#{group.name}'"
+  end
+end
+
+puts "🎉 Seed terminé !"

@@ -1,30 +1,68 @@
-<div class="container">
+<div class="container d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 420px;">
 
-  <h2>Modifier mon profil</h2>
-
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), method: :patch) do |f| %>
-    <%= f.error_notification %>
-    <div class="form-inputs">
-      <%= f.input :username, label: "Prénom Nom", required: true, autofocus: true %>
-
-      <%= f.input :password,
-                  label: "mot de passe",
-                  hint: "Laissez vide si vous ne souhaitez pas le changer", 
-                  input_html: { autocomplete: "new-password" } %>
-
-      <%= f.input :password_confirmation, 
-                  label: "Confirmer le mot de passe",
-                  
-                  input_html: { autocomplete: "new-password" } %>
-
-      <%= f.input :avatar, as: :file, required: false %>
-
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Modifier mon profil</h2>
+      <p class="text-muted small mb-0">Mets à jour tes informations</p>
     </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Mettre à jour", class: "btn btn-primary mb-2" %>
-    </div>
-  <% end %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), method: :patch) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="mb-3">
+        <%= f.label :username, "Prénom et Nom", class: "form-label fw-semibold" %>
+        <%= f.text_field :username,
+              autofocus: true,
+              class: "form-control form-control-lg rounded-3",
+              placeholder: "Ton nom complet" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, "Mot de passe", class: "form-label fw-semibold" %>
+        <%= f.password_field :password,
+              class: "form-control form-control-lg rounded-3",
+              placeholder: "••••••••",
+              autocomplete: "new-password" %>
+        <small class="text-muted">Laissez vide si vous ne souhaitez pas le changer</small>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password_confirmation, "Confirmer le mot de passe", class: "form-label fw-semibold" %>
+        <%= f.password_field :password_confirmation,
+              class: "form-control form-control-lg rounded-3",
+              placeholder: "••••••••",
+              autocomplete: "new-password" %>
+      </div>
+
+      <div class="mb-4 text-center">
+        <%= f.label :avatar, "Photo de profil", class: "form-label fw-semibold d-block" %>
+
+        <% if resource.avatar.attached? %>
+          <%= cl_image_tag(resource.avatar.key, transformation: [
+                {gravity: "face", height: 120, width: 120, crop: "thumb"},
+                {radius: "max"},
+                {fetch_format: "auto"}
+              ], class: "rounded-circle mb-2 d-block mx-auto") %>
+        <% else %>
+          <div class="rounded-circle bg-secondary mb-2 mx-auto" style="width:120px; height:120px;"></div>
+        <% end %>
+
+        <%= f.file_field :avatar, class: "form-control form-control-lg rounded-3" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :gender, "Genre", class: "form-label fw-semibold" %>
+        <%= f.select :gender,
+              [["Homme", "H"], ["Femme", "F"]],
+              {},
+              class: "form-select form-select-lg rounded-3" %>
+      </div>
+
+      <div class="d-grid">
+        <%= f.button :submit, "Mettre à jour", class: "btn btn-primary btn-lg rounded-3" %>
+      </div>
+
+    <% end %>
+
+  </div>
 </div>
-
-
