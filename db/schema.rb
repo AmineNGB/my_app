@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_01_120147) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_04_212956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_01_120147) do
     t.boolean "only_same_gender", default: false
     t.datetime "remember_created_at"
     t.string "username", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

@@ -1,18 +1,25 @@
-<h2>Forgot your password?</h2>
+<div class="container d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 420px;">
+    
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Mot de passe oublié</h2>
+      <p class="text-muted small mb-0">
+        Entre ton nom d'utilisateur pour réinitialiser ton mot de passe
+      </p>
+    </div>
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
+      <div class="mb-4">
+        <%= f.label :username, "Nom d'utilisateur", class: "form-label fw-semibold" %>
+        <%= f.text_field :username, required: true, autofocus: true, class: "form-control form-control-lg rounded-3", placeholder: "Entre ton username" %>
+      </div>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+      <div class="d-grid mb-3">
+        <%= f.button :submit, "Réinitialiser le mot de passe", class: "btn btn-primary btn-lg rounded-3" %>
+      </div>
+    <% end %>
+
+
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -1,73 +1,116 @@
-<div class="container d-flex align-items-center justify-content-center vh-100">
-  <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 480px;">
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="row w-100 g-4">
 
-    <div class="text-center mb-4">
-      <h2 class="fw-bold">Créer un compte</h2>
-      <p class="text-muted small mb-0">Rejoins l'aventure 🎁</p>
-    </div>
+    <!-- Connexion -->
+    <div class="col-12 col-md-6 d-flex justify-content-center">
+      <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 420px;">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold">Connexion</h2>
+          <p class="text-muted small mb-0">Accède à ton espace</p>
+        </div>
 
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="mb-3">
+            <%= f.label :username, "Nom d'utilisateur", class: "form-label fw-semibold" %>
+            <%= f.text_field :username,
+                  autofocus: true,
+                  class: "form-control form-control-lg rounded-3",
+                  placeholder: "Entre ton username" %>
+          </div>
 
-      <%= f.error_notification %>
+          <div class="mb-4">
+            <%= f.label :password, "Mot de passe", class: "form-label fw-semibold" %>
+            <%= f.password_field :password,
+                  class: "form-control form-control-lg rounded-3",
+                  placeholder: "••••••••",
+                  autocomplete: "current-password" %>
+          </div>
 
-      <div class="mb-3">
-        <%= f.label :username, "Prénom + Nom", class: "form-label fw-semibold" %>
-        <%= f.text_field :username,
-              autofocus: true,
-              class: "form-control form-control-lg rounded-3",
-              placeholder: "Prénom Nom" %>
-      </div>
+          <div class="text-end mb-3">
+            <%= link_to "Mot de passe oublié ?",
+                  new_user_password_path,
+                  class: "small text-decoration-none" %>
+          </div>
 
-      <div class="mb-3">
-        <%= f.label :password, "Mot de passe", class: "form-label fw-semibold" %>
-        <%= f.password_field :password,
-              class: "form-control form-control-lg rounded-3",
-              placeholder: "******",
-              autocomplete: "new-password" %>
-        <% if @minimum_password_length %>
-          <div class="form-text">
-            <%= @minimum_password_length %> caractères minimum
+          <div class="d-grid mb-3">
+            <%= f.button :submit, "Je me connecte", class: "btn btn-primary btn-lg rounded-3" %>
+          </div>
+
+          <div class="text-center mt-2">
+            <small class="text-muted">
+              Nouveau compte ?
+              <%= link_to "Créer un compte", "#register", class: "fw-semibold text-decoration-none" %>
+            </small>
           </div>
         <% end %>
       </div>
+    </div>
 
-      <div class="mb-3">
-        <%= f.label :password_confirmation, "Confirmer le mot de passe", class: "form-label fw-semibold" %>
-        <%= f.password_field :password_confirmation,
-              class: "form-control form-control-lg rounded-3",
-              placeholder: "******",
-              autocomplete: "new-password" %>
+    <!-- Création de compte -->
+    <div class="col-12 col-md-6 d-flex justify-content-center" id="register">
+      <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 480px;">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold">Créer un compte</h2>
+          <p class="text-muted small mb-0">Rejoins l'aventure 🎁</p>
+        </div>
+
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
+          <%= f.error_notification %>
+
+          <div class="mb-3">
+            <%= f.label :username, "Prénom + Nom", class: "form-label fw-semibold" %>
+            <%= f.text_field :username,
+                  autofocus: true,
+                  class: "form-control form-control-lg rounded-3",
+                  placeholder: "Prénom Nom" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, "Mot de passe", class: "form-label fw-semibold" %>
+            <%= f.password_field :password,
+                  class: "form-control form-control-lg rounded-3",
+                  placeholder: "••••••••",
+                  autocomplete: "new-password" %>
+            <% if @minimum_password_length %>
+              <small class="text-muted"><%= @minimum_password_length %> caractères minimum</small>
+            <% end %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password_confirmation, "Confirmer le mot de passe", class: "form-label fw-semibold" %>
+            <%= f.password_field :password_confirmation,
+                  class: "form-control form-control-lg rounded-3",
+                  placeholder: "••••••••",
+                  autocomplete: "new-password" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :avatar, "Photo de profil", class: "form-label fw-semibold" %>
+            <%= f.file_field :avatar, required: true, class: "form-control rounded-3" %>
+            <%= f.error :avatar, class: "text-danger small mt-1" %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :gender, "Genre", class: "form-label fw-semibold" %>
+            <%= f.select :gender,
+                  [["Homme", "H"], ["Femme", "F"]],
+                  {},
+                  class: "form-select form-select-lg rounded-3" %>
+          </div>
+
+          <div class="d-grid mb-3">
+            <%= f.button :submit, "Créer mon compte", class: "btn btn-primary btn-lg rounded-3" %>
+          </div>
+
+          <div class="text-center mt-2">
+            <small class="text-muted">
+              Déjà un compte ?
+              <%= link_to "Se connecter", "#login", class: "fw-semibold text-decoration-none" %>
+            </small>
+          </div>
+        <% end %>
       </div>
-
-      <div class="mb-3">
-        <%= f.label :avatar, "Photo de profil", class: "form-label fw-semibold" %>
-        <%= f.file_field :avatar, required: true,
-              class: "form-control rounded-3" %>
-         <%= f.error :avatar, class: "text-danger small mt-1" %>
-      </div>
-
-      <div class="mb-4">
-        <%= f.label :gender, "Genre", class: "form-label fw-semibold" %>
-        <%= f.select :gender,
-              [["Homme", "H"], ["Femme", "F"]],
-              {},
-              class: "form-select form-select-lg rounded-3" %>
-      </div>
-
-      <div class="d-grid">
-        <%= f.button :submit,
-              "Créer mon compte",
-              class: "btn btn-primary btn-lg rounded-3" %>
-      </div>
-
-      <div class="text-center mt-3">
-        <small class="text-muted">
-          Déjà un compte ?
-          <%= link_to "Se connecter", new_user_session_path, class: "fw-semibold text-decoration-none" %>
-        </small>
-      </div>
-
-    <% end %>
+    </div>
 
   </div>
 </div>

@@ -24,6 +24,12 @@
               autocomplete: "current-password" %>
       </div>
 
+      <div class="text-end mb-3">
+        <%= link_to "Mot de passe oublié ?",
+              new_user_password_path,
+              class: "small text-decoration-none" %>
+      </div>
+
       <div class="d-grid">
         <%= f.button :submit,
               "Je me connecte",

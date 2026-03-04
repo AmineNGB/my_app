@@ -29,4 +29,21 @@ class User < ApplicationRecord
   def email_changed?
     false
   end
+
+
+  # dit à Devise de chercher par username pour recoverable
+  def self.send_reset_password_instructions(attributes={})
+    recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+    recoverable.send_reset_password_instructions_internal if recoverable.persisted?
+    recoverable
+  end
+
+  protected
+
+  # méthode interne pour générer token sans email
+  def send_reset_password_instructions_internal
+    token = set_reset_password_token
+    # on ne tente pas d’envoyer d’email
+    token
+  end
 end
