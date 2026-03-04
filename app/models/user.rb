@@ -17,10 +17,13 @@ class User < ApplicationRecord
   enum relation_type: { family: 0, by_marriage: 1 }
 
   validates :username, presence: true, uniqueness: true
+  validate :username_cannot_end_with_space
 
   validates :gender, presence: true
   validates :relation_type, presence: true
   validates :avatar, presence: { message: "Veuillez ajouter une photo de profil" }
+
+  before_validation :strip_trailing_spaces_from_username
 
   def email_required?
     false
@@ -29,7 +32,6 @@ class User < ApplicationRecord
   def email_changed?
     false
   end
-
 
   # dit à Devise de chercher par username pour recoverable
   def self.send_reset_password_instructions(attributes={})
@@ -45,5 +47,19 @@ class User < ApplicationRecord
     token = set_reset_password_token
     # on ne tente pas d’envoyer d’email
     token
+  end
+
+  private
+
+  # Supprime les espaces en début et fin
+  def strip_trailing_spaces_from_username
+    self.username = username.rstrip if username.present?
+  end
+
+  # Validation personnalisée pour bloquer les usernames terminant par un espace
+  def username_cannot_end_with_space
+    if username.present? && username.match?(/\s\z/)
+      errors.add(:username, "ne peut pas se terminer par un espace")
+    end
   end
 end
