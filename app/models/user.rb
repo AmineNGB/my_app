@@ -41,7 +41,7 @@ class User < ApplicationRecord
     recoverable
   end
 
-  protected
+  
 
   # méthode interne pour générer token sans email
   def send_reset_password_instructions_internal
